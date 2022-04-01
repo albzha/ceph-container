@@ -1,0 +1,9 @@
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+DEBIAN_FRONTEND=noninteractive apt-get install -yy --force-yes --no-install-recommends \
+gnupg curl apt-transport-https ca-certificates
+
+ADD libstoragemgmt.tar.gz /tmp/ 
+RUN DEBIAN_FRONTEND=noninteractive apt-get install /tmp/*libstoragemgmt*.deb -yy --force-yes
+
+ADD ceph-grafana-dashboards*.tar.gz /tmp/
+RUN dpkg -i /tmp/ceph-grafana-dashboards*.deb 
